@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>سيستم التلاجات — عرض تقديمي</title>
+<meta name="description" content="نظام متكامل لإدارة المخازن المبردة — تتبع حراري لحظي، باركود لكل بالية، نظام FEFO، وتطبيق مخصص للسواقين." />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>❄️</text></svg>" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@300;400;500;600;700;800&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --ink:#0B1F2A; --ink-2:#1F3A47; --ink-3:#4B6371; --muted:#748793;
+    --line:#E3E8EC; --line-2:#EEF1F3; --bg:#F4F6F8; --surface:#FFFFFF; --surface-2:#FAFBFC;
+    --primary:#0E5A6E; --primary-2:#0A4456; --primary-soft:#E6F3F6;
+    --accent:#16B6CF; --ice:#DBEEF3;
+    --warn:#E8A33C; --warn-soft:#FBEDD3; --danger:#C6464E; --danger-soft:#FBE4E5;
+    --ok:#2F8F66; --ok-soft:#DCEFE5;
+    --shadow-lg: 0 30px 70px -25px rgba(11,31,42,.35);
+    --shadow-md: 0 18px 40px -18px rgba(11,31,42,.28);
+    --radius: 20px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth; scroll-padding-top:84px;}
+  body{
+    background:var(--bg); color:var(--ink);
+    font-family:'Readex Pro','IBM Plex Sans Arabic',Tahoma,sans-serif;
+    -webkit-font-smoothing:antialiased; overflow-x:hidden;
+  }
+  img{max-width:100%; display:block;}
+  a{color:inherit; text-decoration:none;}
+  ul{list-style:none;}
+  .mono{font-family:'JetBrains Mono',monospace; font-feature-settings:'tnum';}
+  .container{max-width:1260px; margin:0 auto; padding:0 28px;}
+  section{position:relative;}
+  ::selection{background:var(--primary); color:#fff;}
+
+  /* ---------- reveal animation ---------- */
+  .reveal{opacity:0; transform:translateY(28px); transition:opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1);}
+  .reveal.in{opacity:1; transform:translateY(0);}
+  .reveal-delay-1.in{transition-delay:.08s;}
+  .reveal-delay-2.in{transition-delay:.16s;}
+
+  /* ---------- nav ---------- */
+  .nav{
+    position:fixed; inset-inline:0; top:0; z-index:100;
+    background:rgba(11,31,42,.66); backdrop-filter:blur(14px) saturate(140%);
+    border-bottom:1px solid rgba(255,255,255,.06);
+    transition:background .3s, box-shadow .3s;
+  }
+  .nav.scrolled{background:rgba(11,31,42,.92); box-shadow:0 10px 30px -14px rgba(0,0,0,.5);}
+  .nav-inner{display:flex; align-items:center; gap:20px; height:68px;}
+  .brand{display:flex; align-items:center; gap:10px; margin-inline-end:auto;}
+  .brand-mark{width:36px; height:36px; border-radius:10px; background:linear-gradient(140deg,var(--accent),var(--primary)); display:grid; place-items:center; font-size:16px; box-shadow:inset 0 -8px 14px rgba(0,0,0,.18);}
+  .brand-text{display:flex; flex-direction:column; line-height:1.15;}
+  .brand-name{color:#fff; font-weight:700; font-size:15px;}
+  .brand-sub{color:#8fa4ad; font-size:10.5px; letter-spacing:.03em;}
+  .nav-links{display:flex; align-items:center; gap:4px;}
+  .nav-links a{color:#c3d1d7; font-size:13.5px; font-weight:500; padding:9px 13px; border-radius:8px; transition:.15s;}
+  .nav-links a:hover{color:#fff; background:rgba(255,255,255,.06);}
+  .nav-cta{background:var(--accent); color:#06222a; font-weight:700; font-size:13px; padding:10px 18px; border-radius:9px; white-space:nowrap; transition:.15s; box-shadow:0 8px 20px -8px rgba(22,182,207,.6);}
+  .nav-cta:hover{background:#3fcadf; transform:translateY(-1px);}
+  @media (max-width:920px){ .nav-links{display:none;} }
+
+  /* ---------- buttons / chips ---------- */
+  .btn{display:inline-flex; align-items:center; gap:9px; padding:14px 26px; border-radius:12px; font-size:15px; font-weight:700; transition:.18s; border:1px solid transparent; cursor:pointer;}
+  .btn-primary{background:var(--accent); color:#06222a; box-shadow:0 14px 30px -10px rgba(22,182,207,.55);}
+  .btn-primary:hover{background:#3fcadf; transform:translateY(-2px);}
+  .btn-ghost{background:rgba(255,255,255,.06); color:#fff; border-color:rgba(255,255,255,.18);}
+  .btn-ghost:hover{background:rgba(255,255,255,.12);}
+  .btn-dark{background:var(--ink); color:#fff;}
+  .btn-dark:hover{background:var(--primary-2);}
+  .chip{display:inline-flex; align-items:center; gap:8px; background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.14); color:#d9e6ea; font-size:12.5px; font-weight:500; padding:8px 14px; border-radius:99px;}
+  .chip svg{width:15px; height:15px; stroke:var(--accent); flex-shrink:0;}
+  .eyebrow{display:inline-flex; align-items:center; gap:8px; color:var(--primary); background:var(--primary-soft); font-size:12.5px; font-weight:700; padding:7px 14px; border-radius:99px; letter-spacing:.01em;}
+  .eyebrow.dark{background:rgba(22,182,207,.12); color:#7fe3f2;}
+
+  /* ---------- hero ---------- */
+  .hero{
+    position:relative; background:radial-gradient(120% 140% at 15% -10%, #123c4a 0%, var(--ink) 55%), var(--ink);
+    color:#fff; padding:150px 0 120px; overflow:hidden;
+  }
+  .hero::before, .hero::after{
+    content:''; position:absolute; border-radius:50%; filter:blur(70px); opacity:.35; pointer-events:none;
+  }
+  .hero::before{width:520px; height:520px; background:var(--accent); top:-180px; inset-inline-end:-160px; animation:float1 14s ease-in-out infinite;}
+  .hero::after{width:420px; height:420px; background:#0a4456; bottom:-200px; inset-inline-start:-120px; animation:float2 16s ease-in-out infinite;}
+  @keyframes float1{0%,100%{transform:translate(0,0);} 50%{transform:translate(-30px,40px);}}
+  @keyframes float2{0%,100%{transform:translate(0,0);} 50%{transform:translate(30px,-30px);}}
+  .hero-grid{position:relative; z-index:2; display:grid; grid-template-columns:1.05fr .95fr; gap:56px; align-items:center;}
+  .hero h1{font-size:44px; line-height:1.32; font-weight:800; margin:20px 0 20px; letter-spacing:-.01em;}
+  .hero h1 span{color:var(--accent);}
+  .hero p.lead{font-size:17px; line-height:1.9; color:#c3d3d9; max-width:560px; margin-bottom:32px;}
+  .hero-actions{display:flex; gap:14px; flex-wrap:wrap; margin-bottom:36px;}
+  .hero-chips{display:flex; flex-wrap:wrap; gap:9px;}
+  @media (max-width:980px){ .hero-grid{grid-template-columns:1fr;} .hero h1{font-size:32px;} }
+
+  /* browser frame */
+  .frame{
+    background:var(--surface); border-radius:16px; overflow:hidden; box-shadow:var(--shadow-lg);
+    border:1px solid rgba(255,255,255,.08);
+  }
+  .frame-bar{
+    background:#eef1f3; padding:10px 14px; display:flex; align-items:center; gap:10px; border-bottom:1px solid var(--line);
+  }
+  .frame-dots{display:flex; gap:6px;}
+  .frame-dots span{width:9px; height:9px; border-radius:50%; background:#d7dde1;}
+  .frame-dots span:nth-child(1){background:#ef6a5f;}
+  .frame-dots span:nth-child(2){background:#f4bf4f;}
+  .frame-dots span:nth-child(3){background:#61c454;}
+  .frame-url{
+    margin-inline-start:6px; background:#fff; border:1px solid var(--line); border-radius:7px; padding:5px 12px;
+    font-size:11px; color:var(--ink-3); font-family:'JetBrains Mono',monospace; display:flex; align-items:center; gap:6px;
+    flex:1; max-width:320px;
+  }
+  .frame-url svg{width:11px; height:11px; stroke:var(--ok); flex-shrink:0;}
+  .frame img{width:100%; height:auto; cursor:zoom-in; transition:filter .2s;}
+  .frame-shell{position:relative;}
+  .frame-shell::after{
+    content:''; position:absolute; inset:-18px; z-index:-1; border-radius:26px;
+    background:linear-gradient(140deg, rgba(22,182,207,.35), transparent 60%); filter:blur(30px); opacity:.6;
+  }
+  .hero .frame-shell{transform:perspective(1400px) rotateY(-6deg) rotateX(2deg);}
+
+  /* stat / capability strip */
+  .strip{background:var(--ink); border-top:1px solid rgba(255,255,255,.06); padding:26px 0;}
+  .strip-row{display:flex; flex-wrap:wrap; gap:12px; justify-content:center;}
+
+  /* ---------- section shells ---------- */
+  .section{padding:108px 0;}
+  .section.alt{background:var(--surface);}
+  .section-head{max-width:680px; margin-bottom:56px;}
+  .section-head h2{font-size:32px; font-weight:800; margin:16px 0 14px; line-height:1.35;}
+  .section-head p{font-size:16px; color:var(--ink-3); line-height:1.85;}
+  .section-head.center{margin-inline:auto; text-align:center;}
+
+  .feature-row{display:grid; grid-template-columns:.92fr 1.08fr; gap:64px; align-items:center;}
+  .feature-row .copy{order:1;}
+  .feature-row .media{order:2;}
+  .feature-row.rev .copy{order:2;}
+  .feature-row.rev .media{order:1;}
+  .feature-row + .feature-row{margin-top:130px;}
+  @media (max-width:980px){
+    .feature-row{grid-template-columns:1fr; gap:34px;}
+    .feature-row .copy, .feature-row.rev .copy{order:2 !important;}
+    .feature-row .media, .feature-row.rev .media{order:1 !important;}
+    .feature-row + .feature-row{margin-top:70px;}
+  }
+
+  .copy .eyebrow{margin-bottom:16px;}
+  .copy h3{font-size:27px; font-weight:800; line-height:1.4; margin-bottom:14px;}
+  .copy > p{font-size:15.5px; color:var(--ink-3); line-height:1.9; margin-bottom:22px;}
+  .check-list{display:flex; flex-direction:column; gap:13px;}
+  .check-list li{display:flex; align-items:flex-start; gap:11px; font-size:14.5px; color:var(--ink-2); line-height:1.7;}
+  .check-list li b{color:var(--ink);}
+  .check-ico{flex-shrink:0; width:21px; height:21px; border-radius:7px; background:var(--ok-soft); color:var(--ok); display:grid; place-items:center; margin-top:1px;}
+  .check-ico svg{width:12px; height:12px; stroke-width:3;}
+
+  .media .frame-shell::after{background:linear-gradient(140deg, rgba(14,90,110,.18), transparent 60%);}
+
+  /* two-up split */
+  .split-two{display:grid; grid-template-columns:1fr 1fr; gap:26px;}
+  @media (max-width:760px){.split-two{grid-template-columns:1fr;}}
+  .split-card{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:22px; box-shadow:var(--shadow-md);}
+  .split-card .frame{box-shadow:none; border:1px solid var(--line);}
+  .split-card h4{font-size:16.5px; font-weight:700; margin:16px 0 8px;}
+  .split-card p{font-size:13.5px; color:var(--ink-3); line-height:1.75;}
+
+  /* driver tablet gallery */
+  .tablet-wrap{background:linear-gradient(180deg, var(--ink), #0d2a37); border-radius:28px; padding:64px 40px;}
+  .tablet-wrap .section-head h2, .tablet-wrap .section-head p{color:#fff;}
+  .tablet-wrap .section-head p{color:#a9bcc3;}
+  .tablet-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:22px;}
+  @media (max-width:1100px){.tablet-grid{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:560px){.tablet-grid{grid-template-columns:1fr;}}
+  .tablet-card{background:#0f2b36; border:1px solid rgba(255,255,255,.08); border-radius:18px; padding:14px; transition:transform .25s;}
+  .tablet-card:hover{transform:translateY(-6px);}
+  .tablet-frame{border-radius:11px; overflow:hidden; border:1px solid rgba(255,255,255,.1); box-shadow:0 20px 40px -18px rgba(0,0,0,.6);}
+  .tablet-frame img{cursor:zoom-in;}
+  .tablet-card .num{color:var(--accent); font-family:'JetBrains Mono',monospace; font-size:12px; font-weight:600;}
+  .tablet-card h5{color:#fff; font-size:15px; font-weight:700; margin:8px 0 6px;}
+  .tablet-card p{color:#9fb3ba; font-size:12.5px; line-height:1.7;}
+
+  /* advantages grid */
+  .adv-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:22px;}
+  @media (max-width:900px){.adv-grid{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:600px){.adv-grid{grid-template-columns:1fr;}}
+  .adv-card{background:var(--surface); border:1px solid var(--line); border-radius:18px; padding:26px; transition:.2s;}
+  .adv-card:hover{box-shadow:var(--shadow-md); transform:translateY(-4px); border-color:transparent;}
+  .adv-ico{width:44px; height:44px; border-radius:12px; background:var(--primary-soft); color:var(--primary); display:grid; place-items:center; margin-bottom:16px;}
+  .adv-ico svg{width:22px; height:22px; stroke-width:1.7;}
+  .adv-card h4{font-size:16px; font-weight:700; margin-bottom:8px;}
+  .adv-card p{font-size:13.5px; color:var(--ink-3); line-height:1.75;}
+
+  /* workflow strip */
+  .flow{display:flex; align-items:stretch; gap:0; overflow-x:auto; padding-bottom:6px;}
+  .flow-step{flex:1; min-width:168px; background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:20px; position:relative;}
+  .flow-step + .flow-step{margin-inline-start:26px;}
+  .flow-step + .flow-step::before{
+    content:''; position:absolute; inset-inline-start:-26px; top:50%; transform:translateY(-50%);
+    width:26px; height:2px; background:repeating-linear-gradient(90deg, var(--line) 0 6px, transparent 6px 10px);
+  }
+  .flow-step .n{width:30px; height:30px; border-radius:9px; background:var(--ink); color:var(--accent); display:grid; place-items:center; font-weight:700; font-size:13px; margin-bottom:14px; font-family:'JetBrains Mono',monospace;}
+  .flow-step h5{font-size:14.5px; font-weight:700; margin-bottom:6px;}
+  .flow-step p{font-size:12.5px; color:var(--ink-3); line-height:1.7;}
+
+  /* CTA */
+  .cta{
+    background:radial-gradient(120% 160% at 85% 0%, #123c4a 0%, var(--ink) 55%), var(--ink);
+    color:#fff; border-radius:28px; padding:70px 48px; text-align:center; position:relative; overflow:hidden;
+  }
+  .cta h2{font-size:32px; font-weight:800; margin-bottom:16px;}
+  .cta p{color:#c3d3d9; font-size:15.5px; max-width:560px; margin:0 auto 32px; line-height:1.85;}
+  .cta-actions{display:flex; gap:14px; justify-content:center; flex-wrap:wrap;}
+  .cta-contact{margin-top:28px; display:flex; gap:22px; justify-content:center; flex-wrap:wrap; color:#9fb3ba; font-size:13.5px;}
+  .cta-contact a{color:#cfe6ec; font-weight:600;}
+  .cta-contact span{display:flex; align-items:center; gap:7px;}
+  .cta-contact svg{width:15px; height:15px; stroke:var(--accent);}
+
+  footer{padding:34px 0; text-align:center; color:var(--muted); font-size:12.5px;}
+  footer .fbrand{font-weight:700; color:var(--ink-2);}
+
+  /* lightbox */
+  .lightbox{position:fixed; inset:0; background:rgba(6,15,20,.92); z-index:200; display:none; align-items:center; justify-content:center; padding:40px; backdrop-filter:blur(6px);}
+  .lightbox.open{display:flex;}
+  .lightbox img{max-width:min(1400px,92vw); max-height:88vh; border-radius:12px; box-shadow:0 40px 90px -20px rgba(0,0,0,.6);}
+  .lightbox-close{position:absolute; top:26px; inset-inline-end:32px; width:42px; height:42px; border-radius:50%; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.2); color:#fff; font-size:20px; display:grid; place-items:center; cursor:pointer;}
+  .lightbox-close:hover{background:rgba(255,255,255,.16);}
+
+  h1,h2,h3,h4,h5{letter-spacing:-.01em;}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <div class="container nav-inner">
+    <div class="brand">
+      <div class="brand-mark">❄️</div>
+      <div class="brand-text">
+        <span class="brand-name">سيستم التلاجات</span>
+        <span class="brand-sub">Cold Storage WMS</span>
+      </div>
+    </div>
+    <div class="nav-links">
+      <a href="#dashboard">لوحة التحكم</a>
+      <a href="#warehouses">المخازن</a>
+      <a href="#operations">العمليات</a>
+      <a href="#driver">تطبيق السواق</a>
+      <a href="#business">العملاء والفواتير</a>
+      <a href="#why">ليه سيستم التلاجات</a>
+    </div>
+    <a href="#contact" class="nav-cta">احجز عرض تجريبي</a>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <div class="container hero-grid">
+    <div class="reveal in">
+      <span class="eyebrow dark">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M2 12h20M4.9 4.9l14.2 14.2M19.1 4.9L4.9 19.1"/></svg>
+        منصة متكاملة لإدارة المخازن المبردة
+      </span>
+      <h1>تحكّم كامل في كل تلاجة، كل باليت، وكل درجة حرارة — <span>من شاشة واحدة</span></h1>
+      <p class="lead">
+        من لحظة استلام الشحنة لحد تسليمها للعميل: تتبع حراري لحظي لكل عنبر، باركود وQR تلقائي لكل بالية،
+        نظام صرف ذكي يمنع هلاك البضاعة قبل ما يحصل، وتطبيق مخصص لسواقين التوصيل — كله في نظام واحد بالعربي.
+      </p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn btn-primary">
+          احجز عرض تجريبي مباشر
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        </a>
+        <a href="#dashboard" class="btn btn-ghost">استكشف المميزات</a>
+      </div>
+      <div class="hero-chips">
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 2v6M12 22v-6M4.2 10a8 8 0 0115.6 0M4.2 14a8 8 0 0015.6 0"/></svg> تتبع حراري لحظي</span>
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="3" y="7" width="18" height="10" rx="1"/><path d="M7 7v10M11 7v10M15 7v10"/></svg> باركود / QR تلقائي</span>
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 22s7-6.5 7-12a7 7 0 10-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg> خريطة حية للمخزون</span>
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M9 21v-2M15 21v-2"/></svg> تطبيق تابلت للسواقين</span>
+      </div>
+    </div>
+    <div class="reveal reveal-delay-1 in">
+      <div class="frame-shell">
+        <div class="frame">
+          <div class="frame-bar">
+            <div class="frame-dots"><span></span><span></span><span></span></div>
+            <div class="frame-url">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg>
+              app.cold-storage-wms.com/dashboard
+            </div>
+          </div>
+          <img src="assets/dashboard.png" alt="لوحة التحكم التشغيلية" loading="eager" />
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="strip">
+  <div class="container strip-row">
+    <span class="chip">❄️ حرارة مستهدفة لكل عنبر</span>
+    <span class="chip">📦 باركود فريد لكل بالية</span>
+    <span class="chip">⏱️ نظام FEFO تلقائي لمنع الهالك</span>
+    <span class="chip">🗺️ خريطة تخزين تفاعلية</span>
+    <span class="chip">📱 تطبيق مخصص للسواقين</span>
+    <span class="chip">🧾 فوترة وعقود عملاء تلقائية</span>
+    <span class="chip">📊 تقارير PDF / Excel جاهزة</span>
+  </div>
+</div>
+
+<!-- ============ DASHBOARD ============ -->
+<section class="section" id="dashboard">
+  <div class="container">
+    <div class="feature-row">
+      <div class="copy reveal">
+        <span class="eyebrow">الداشبورد التشغيلي</span>
+        <h3>كل قرار محتاجه... قدامك من أول ثانية تفتح النظام</h3>
+        <p>مش محتاج تدوّر بين شاشات عشان تعرف إيه اللي محتاج تدخل عليه. الداشبورد بيلخصلك حالة المخازن كلها،
+          التنبيهات المهمة، وآخر الحركات، بشكل بصري واضح.</p>
+        <ul class="check-list">
+          <li><span class="check-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span> تنبيهات فورية للنواقص، الصلاحيات القريبة، ونسب الامتلاء المرتفعة</li>
+          <li><span class="check-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span> نسبة امتلاء كل عنبر لحظيًا مع <b>درجة الحرارة الحالية والمستهدفة</b></li>
+          <li><span class="check-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span> سجل كامل لآخر العمليات: تخزين، صرف، نقل — بالمستخدم والوقت</li>
+          <li><span class="check-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span> تنبيه بالأصناف القريبة من انتهاء الصلاحية خلال 7 أيام</li>
+        </ul>
+      </div>
+      <div class="media reveal reveal-delay-1">
+        <div class="frame-shell">
+          <div class="frame">
+            <div class="frame-bar">
+              <div class="frame-dots"><span></span><span></span><span></span></div>
+              <div class="frame-url"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg> /dashboard</div>
+            </div>
+            <img src="assets/dashboard.png" alt="لوحة التحكم" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WAREHOUSES ============ -->
+<section class="section alt" id="warehouses">
+  <div class="container">
+    <div class="feature-row rev">
+      <div class="copy reveal">
+        <span class="eyebrow">إدارة العنابر</span>
+        <h3>عندك أكتر من مخزن؟ تشوفهم كلهم بنظرة واحدة</h3>
+        <p>كل عنبر له بطاقة توضح خريطة الامتلاء بالألوان، الحرارة المستهدفة، عدد الأبواب والطوابق،
+          وحالته التشغيلية — نشط، تحت الصيانة، أو متوقف.</p>
+        <ul class="check-list">
+          <li><span class="check-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span> خريطة حرارية (Heatmap) توضح المساحات المشغولة والفاضية لحظيًا</li>
+          <li><span class="check-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span> حرارة مستهدفة مختلفة لكل عنبر حسب نوع البضاعة</li>
+          <li><span class="check-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span> إدارة عدد غير محدود من العنابر والمخازن من حساب واحد</li>
+          <li><span class="check-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span> جدولة الصيانة وتتبع حالة كل عنبر تشغيليًا</li>
+        </ul>
+      </div>
+      <div class="media reveal reveal-delay-1">
+        <div class="frame-shell">
+          <div class="frame">
+            <div class="frame-bar">
+              <div class="frame-dots"><span></span><span></span><span></span></div>
+              <div class="frame-url"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg> /warehouses</div>
+            </div>
+            <img src="assets/warehouses.png" alt="إدارة العنابر" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="feature-row">
+      <div class="copy reveal">
+        <span class="eyebrow">الخريطة الحية</span>
+        <h3>كل بالية... تعرف مكانها بالظبط، لحظة بلحظة</h3>
+        <p>خريطة تفاعلية لكل مكان تخزين جوه العنبر. دوس على أي مكان تشوف كل التفاصيل: الصنف، الكمية،
+          العميل، وتاريخ الانتهاء — من غير ما تنزل المخزن.</p>
+        <ul class="check-list">
+          <li><span class="check-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span> فلترة فورية بالحالة (مشغول / فاضي / محجوز) أو بالعميل أو تاريخ الصلاحية</li>
+          <li><span class="check-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span> تفاصيل كل بالية بلمسة واحدة: الباركود، الوزن، تاريخ التخزين، ومين استلمها</li>
+          <li><span class="check-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span> تصدير صورة من الخريطة لأي اجتماع أو جرد</li>
+        </ul>
+      </div>
+      <div class="media reveal reveal-delay-1">
+        <div class="frame-shell">
+          <div class="frame">
+            <div class="frame-bar">
+              <div class="frame-dots"><span></span><span></span><span></span></div>
+              <div class="frame-url"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg> /live-map</div>
+            </div>
+            <img src="assets/livemap.png" alt="الخريطة الحية" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="feature-row rev">
+      <div class="copy reveal">
+        <span class="eyebrow">بانى الخرائط</span>
+        <h3>صمّم مخزنك بنفسك... من غير ولا سطر برمجة</h3>
+        <p>أداة سحب وإفلات بسيطة تسمحلك ترسم شبكة التخزين، تحدد الممرات والأبواب والأعمدة،
+          وتشوف الإحصائيات (السعة، عدد الأماكن) وانت لسه بتصمم.</p>
+        <ul class="check-list">
+          <li><span class="check-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span> قوالب جاهزة لأشكال العنابر الشائعة أو تصميم حر بالكامل</li>
+          <li><span class="check-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span> تخصيص مناطق بالكامل لعميل معين داخل نفس العنبر</li>
+          <li><span class="check-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span> معاينة فورية للسعة والمساحة قبل ما تحفظ التصميم</li>
+        </ul>
+      </div>
+      <div class="media reveal reveal-delay-1">
+        <div class="frame-shell">
+          <div class="frame">
+            <div class="frame-bar">
+              <div class="frame-dots"><span></span><span></span><span></span></div>
+              <div class="frame-url"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg> /layout-builder</div>
+            </div>
+            <img src="assets/layoutbuilder.png" alt="بانى الخرائط" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ OPERATIONS ============ -->
+<section class="section" id="operations">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">دورة العمليات اليومية</span>
+      <h2>من استلام الشحنة لحد تسليمها... خطوات مضبوطة من غير ورق</h2>
+      <p>كل عملية في المخزن — استلام، تخزين، صرف، نقل — بتتسجل تلقائيًا بالباركود، وبتتحدث الخريطة والداشبورد
+        فورًا من غير أي تدخل يدوي.</p>
+    </div>
+
+    <div class="flow reveal reveal-delay-1" style="margin-bottom:70px;">
+      <div class="flow-step"><div class="n">01</div><h5>استلام الشحنة</h5><p>تسجيل المورد، الفاتورة، والأصناف بتفاصيلها الكاملة</p></div>
+      <div class="flow-step"><div class="n">02</div><h5>باركود تلقائي</h5><p>توليد باركود/QR فريد لكل بالية وطباعة الستيكرات فورًا</p></div>
+      <div class="flow-step"><div class="n">03</div><h5>اقتراح مكان التخزين</h5><p>السيستم يقترح المكان الأنسب حسب نوع البضاعة والحرارة</p></div>
+      <div class="flow-step"><div class="n">04</div><h5>صرف بنظام FEFO</h5><p>أولوية تلقائية للبضاعة الأقرب لانتهاء الصلاحية</p></div>
+      <div class="flow-step"><div class="n">05</div><h5>تسليم وفوترة</h5><p>تحديث الرصيد وإصدار الفاتورة تلقائيًا للعميل</p></div>
+    </div>
+
+    <div class="split-two reveal reveal-delay-1" style="margin-bottom:26px;">
+      <div class="split-card">
+        <div class="frame">
+          <div class="frame-bar"><div class="frame-dots"><span></span><span></span><span></span></div><div class="frame-url">/receive-shipment</div></div>
+          <img src="assets/receive.png" alt="استلام شحنة جديدة" />
+        </div>
+        <h4>استلام شحنة في دقايق</h4>
+        <p>تسجيل الشحنة والمورد وفاتورة الشراء، وتحديد الفئة والوزن وتاريخ الانتهاء لكل صنف — والسيستم يجهز الباركودات ويقترح أماكن التخزين المناسبة للحرارة المطلوبة تلقائيًا.</p>
+      </div>
+      <div class="split-card">
+        <div class="frame">
+          <div class="frame-bar"><div class="frame-dots"><span></span><span></span><span></span></div><div class="frame-url">/barcodes</div></div>
+          <img src="assets/barcodes.png" alt="باركودات الشحنة" />
+        </div>
+        <h4>باركود وQR فريد لكل بالية</h4>
+        <p>توليد وطباعة ستيكرات بمقاسات مختلفة، بمعاينة قبل الطباعة، ودعم كامل لطابعات الحرارة (TSC, Zebra) وتصدير CSV لأي نظام تاني.</p>
+      </div>
+    </div>
+
+    <div class="feature-row rev" style="margin-top:90px;">
+      <div class="copy reveal">
+        <span class="eyebrow">نظام FEFO الذكي</span>
+        <h3>صرف ذكي يمنع هلاك البضاعة قبل ما يحصل</h3>
+        <p>بدل ما حد يقرر يدويًا أي بالية تتصرف، السيستم بيرتب الباليتات تلقائيًا حسب <b>الأقرب لانتهاء الصلاحية أولًا (FEFO)</b>،
+          ويوضح للسواق أقصر مسار جوه المخزن لتنفيذ الأمر.</p>
+        <ul class="check-list">
+          <li><span class="check-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span> اقتراح تلقائي أو اختيار يدوي — القرار ليك دايمًا</li>
+          <li><span class="check-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span> عرض أماكن كل الباليتات على الخريطة قبل التنفيذ</li>
+          <li><span class="check-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span> تقدير المسافة والوقت التقريبي لتنفيذ الأمر</li>
+          <li><span class="check-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span> تنبيه واضح على أي بالية قربت تنتهي صلاحيتها</li>
+        </ul>
+      </div>
+      <div class="media reveal reveal-delay-1">
+        <div class="frame-shell">
+          <div class="frame">
+            <div class="frame-bar">
+              <div class="frame-dots"><span></span><span></span><span></span></div>
+              <div class="frame-url"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg> /dispatch-orders</div>
+            </div>
+            <img src="assets/dispatch.png" alt="أمر صرف جديد بنظام FEFO" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DRIVER TABLET ============ -->
+<section class="section alt" id="driver">
+  <div class="container">
+    <div class="tablet-wrap reveal">
+      <div class="section-head center" style="margin-inline:auto; text-align:center;">
+        <span class="eyebrow dark">تطبيق السواق</span>
+        <h2>تطبيق تابلت مخصص لسواقين التوصيل والمناولة</h2>
+        <p>شاشة مبسطة وسريعة، مصممة للاستخدام جوه المخزن أو في الطريق: مهامه اليومية، خريطة المخزن،
+          مسح الباركود، والنقل بين العنابر — كله بضغطة زرار من غير تعقيد.</p>
+      </div>
+      <div class="tablet-grid">
+        <div class="tablet-card">
+          <div class="tablet-frame"><img src="assets/tablet_home.png" alt="الرئيسية - تابلت السواق" /></div>
+          <span class="num">01</span>
+          <h5>مهام اليوم</h5>
+          <p>كل المهام المطلوبة من السواق مرتبة ومحدثة لحظيًا من الإدارة</p>
+        </div>
+        <div class="tablet-card">
+          <div class="tablet-frame"><img src="assets/tablet_map.png" alt="خريطة المخزن - تابلت السواق" /></div>
+          <span class="num">02</span>
+          <h5>خريطة المخزن</h5>
+          <p>يشوف أقرب الأماكن الفاضية وتفاصيل أي بالية وهو واقف قدامها</p>
+        </div>
+        <div class="tablet-card">
+          <div class="tablet-frame"><img src="assets/tablet_scan.png" alt="مسح باركود - تابلت السواق" /></div>
+          <span class="num">03</span>
+          <h5>مسح باركود</h5>
+          <p>مسح البالية والسيستم يقترح مكان التخزين المناسب تلقائيًا</p>
+        </div>
+        <div class="tablet-card">
+          <div class="tablet-frame"><img src="assets/tablet_transfer.png" alt="نقل بين عنابر - تابلت السواق" /></div>
+          <span class="num">04</span>
+          <h5>نقل بين عنابر</h5>
+          <p>تأكيد الخروج والوصول بخطوتين بس، مع تسجيل سبب النقل</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BUSINESS (customers / invoices / reports) ============ -->
+<section class="section" id="business">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">إدارة الأعمال</span>
+      <h2>مش بس تخزين... إدارة تجارية كاملة لعملاء التخزين البارد</h2>
+      <p>لو بتأجّر مساحات تخزين لعملاء خارجيين، السيستم بيدير العقود والفواتير والتحصيل تلقائيًا،
+        وبيديك تقارير جاهزة لكل قرار.</p>
+    </div>
+
+    <div class="feature-row">
+      <div class="copy reveal">
+        <span class="eyebrow">العملاء والعقود</span>
+        <h3>ملف كامل لكل عميل — عقده، رصيده، وكل باليت ليه</h3>
+        <ul class="check-list">
+          <li><span class="check-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span> عقود تخزين بأسعار وشروط مخصصة لكل عميل، مع تجديد تلقائي</li>
+          <li><span class="check-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span> متابعة الرصيد المتاح والمستخدم من العقد لحظيًا</li>
+          <li><span class="check-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span> تنبيه تلقائي للعقود القريبة من الانتهاء</li>
+        </ul>
+      </div>
+      <div class="media reveal reveal-delay-1">
+        <div class="frame-shell">
+          <div class="frame">
+            <div class="frame-bar"><div class="frame-dots"><span></span><span></span><span></span></div><div class="frame-url">/customers</div></div>
+            <img src="assets/customers.png" alt="إدارة العملاء والعقود" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="feature-row rev">
+      <div class="copy reveal">
+        <span class="eyebrow">الفوترة</span>
+        <h3>فوترة تلقائية... وتحصيل ما بيفوتش عليك فاتورة</h3>
+        <ul class="check-list">
+          <li><span class="check-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span> احتساب الفاتورة تلقائيًا حسب عدد أيام التخزين الفعلية</li>
+          <li><span class="check-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span> تنبيه فوري للفواتير المتأخرة مع سجل تذكيرات كامل</li>
+          <li><span class="check-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span> فاتورة PDF احترافية جاهزة للطباعة أو الإرسال مباشرة</li>
+        </ul>
+      </div>
+      <div class="media reveal reveal-delay-1">
+        <div class="frame-shell">
+          <div class="frame">
+            <div class="frame-bar"><div class="frame-dots"><span></span><span></span><span></span></div><div class="frame-url">/invoices</div></div>
+            <img src="assets/invoices.png" alt="الفواتير" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="feature-row">
+      <div class="copy reveal">
+        <span class="eyebrow">التقارير والتحليلات</span>
+        <h3>تقارير جاهزة تدعم قرارك... مش بس أرقام على الشاشة</h3>
+        <ul class="check-list">
+          <li><span class="check-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span> تقارير حركة الأصناف، الامتلاء، الصلاحيات، وأداء العمالة</li>
+          <li><span class="check-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span> فلترة سريعة بالفترة الزمنية (يوم / أسبوع / ربع / سنة)</li>
+          <li><span class="check-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span> تصدير مباشر PDF أو Excel لأي تقرير بضغطة واحدة</li>
+        </ul>
+      </div>
+      <div class="media reveal reveal-delay-1">
+        <div class="frame-shell">
+          <div class="frame">
+            <div class="frame-bar"><div class="frame-dots"><span></span><span></span><span></span></div><div class="frame-url">/reports</div></div>
+            <img src="assets/reports.png" alt="التقارير" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHY US ============ -->
+<section class="section alt" id="why">
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="eyebrow">ليه سيستم التلاجات؟</span>
+      <h2>مش نظام مخازن عام... اتصمم خصيصًا لسلسلة التبريد</h2>
+      <p>فيه فرق كبير بين نظام WMS عادي، ونظام مبني من الأول عشان يفهم احتياجات التخزين البارد.</p>
+    </div>
+    <div class="adv-grid reveal reveal-delay-1">
+      <div class="adv-card">
+        <div class="adv-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 2v6M12 22v-6M4.2 10a8 8 0 0115.6 0M4.2 14a8 8 0 0015.6 0"/></svg></div>
+        <h4>مبني لسلسلة التبريد فعليًا</h4>
+        <p>تتبع درجة الحرارة لكل عنبر، تنبيهات صلاحية، ونظام FEFO — مش إضافات، ده أساس تصميم النظام.</p>
+      </div>
+      <div class="adv-card">
+        <div class="adv-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 5h18M3 12h18M3 19h18"/></svg></div>
+        <h4>عربي بالكامل وواجهة RTL</h4>
+        <p>مصمم من الأساس للسوق المحلي — مش نظام مترجم، الواجهة والتجربة اتبنت بالعربي من البداية.</p>
+      </div>
+      <div class="adv-card">
+        <div class="adv-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M9 21v-2M15 21v-2"/></svg></div>
+        <h4>يشتغل على أي جهاز</h4>
+        <p>كمبيوتر للإدارة، تابلت للسواقين والمناولة، وموبايل لمتابعة سريعة من أي مكان.</p>
+      </div>
+      <div class="adv-card">
+        <div class="adv-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 15a3 3 0 100-6 3 3 0 000 6z"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 11-4 0v-.09a1.65 1.65 0 00-1-1.51 1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 110-4h.09a1.65 1.65 0 001.51-1 1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 114 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 110 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg></div>
+        <h4>صلاحيات مستخدمين مرنة</h4>
+        <p>مدير، مشرف مخزن، محاسب، سواق — كل واحد يشوف ويعمل بس اللي يخصه.</p>
+      </div>
+      <div class="adv-card">
+        <div class="adv-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+        <h4>تحديثات لحظية بلا تحديث صفحة</h4>
+        <p>أي حركة تخزين أو صرف أو نقل تتحدث فورًا على الخريطة والداشبورد لكل المستخدمين.</p>
+      </div>
+      <div class="adv-card">
+        <div class="adv-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg></div>
+        <h4>تنفيذ وتدريب متكامل</h4>
+        <p>مش بس نبيعلك النظام — بنساعدك تجهزه على مخازنك فعليًا ونمود فريقك بالتدريب اللازم.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section class="section" id="contact">
+  <div class="container">
+    <div class="cta reveal">
+      <h2>جاهزين نطور طريقة إدارتكم للمخازن المبردة؟</h2>
+      <p>احجز عرض تجريبي مباشر نوريكم فيه النظام شغال على بيانات مطابقة لطبيعة مخازنكم،
+        ونجاوب على أي سؤال عن التنفيذ والتكامل مع أنظمتكم الحالية.</p>
+      <div class="cta-actions">
+        <a href="mailto:mahmoudhabib55200@gmail.com?subject=طلب%20عرض%20تجريبي%20-%20سيستم%20التلاجات" class="btn btn-primary">
+          احجز عرض تجريبي الآن
+        </a>
+        <a href="#dashboard" class="btn btn-ghost">راجع المميزات تاني</a>
+      </div>
+      <div class="cta-contact">
+        <span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z" opacity="0"/><path d="M22 6l-10 7L2 6"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg>
+          <a href="mailto:mahmoudhabib55200@gmail.com">mahmoudhabib55200@gmail.com</a>
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <span class="fbrand">سيستم التلاجات</span> · Cold Storage WMS — عرض تقديمي مُعد خصيصًا للمناقشة
+  </div>
+</footer>
+
+<div class="lightbox" id="lightbox">
+  <div class="lightbox-close" id="lightboxClose">✕</div>
+  <img id="lightboxImg" src="" alt="معاينة" />
+</div>
+
+<script>
+  // nav shadow on scroll
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+  }, { passive: true });
+
+  // reveal on scroll
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+  revealEls.forEach(el => io.observe(el));
+
+  // lightbox for feature screenshots
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  document.querySelectorAll('.frame img, .tablet-frame img').forEach(img => {
+    img.addEventListener('click', () => {
+      lightboxImg.src = img.src;
+      lightboxImg.alt = img.alt;
+      lightbox.classList.add('open');
+    });
+  });
+  function closeLightbox(){ lightbox.classList.remove('open'); lightboxImg.src=''; }
+  document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+  window.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
+</script>
+
+</body>
+</html>
