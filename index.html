@@ -3,11 +3,52 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>سيستم التلاجات — عرض تقديمي</title>
-<meta name="description" content="نظام متكامل لإدارة المخازن المبردة — تتبع حراري لحظي، باركود لكل بالية، نظام FEFO، وتطبيق مخصص للسواقين." />
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>❄️</text></svg>" />
+
+<!-- ====== SEO: أساسيات ====== -->
+<title>CoolStock | نظام إدارة المخازن المبردة والثلاجات</title>
+<meta name="description" content="برنامج إدارة مخازن مبردة وثلاجات حفظ بالعربي: تتبع درجة الحرارة لحظيًا، باركود لكل بالية، نظام صرف FEFO يمنع الهالك، خريطة مخزون حية، فوترة عملاء، وتطبيق تابلت للسواقين. احجز عرض تجريبي مجاني." />
+<meta name="keywords" content="نظام إدارة المخازن المبردة, برنامج إدارة ثلاجات, نظام إدارة مستودعات مبردة, cold storage WMS, نظام FEFO, تتبع درجة الحرارة, برنامج مخازن بالعربي, إدارة سلسلة التبريد, نظام باركود مخازن, برنامج ثلاجات حفظ الخضار والفاكهة" />
+<meta name="author" content="CoolStock" />
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+<meta name="googlebot" content="index, follow" />
+<link rel="canonical" href="https://www.coolstock.store/" />
+
+<!-- ====== SEO: اللغة والاستهداف الجغرافي ====== -->
+<link rel="alternate" hreflang="ar" href="https://www.coolstock.store/" />
+<link rel="alternate" hreflang="ar-EG" href="https://www.coolstock.store/" />
+<link rel="alternate" hreflang="ar-SA" href="https://www.coolstock.store/" />
+<link rel="alternate" hreflang="en" href="https://www.coolstock.store/en/" />
+<link rel="alternate" hreflang="x-default" href="https://www.coolstock.store/" />
+
+<!-- ====== مشاركة على السوشيال (Open Graph) ====== -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="CoolStock" />
+<meta property="og:locale" content="ar_EG" />
+<meta property="og:locale:alternate" content="ar_SA" />
+<meta property="og:locale:alternate" content="en_US" />
+<meta property="og:url" content="https://www.coolstock.store/" />
+<meta property="og:title" content="CoolStock | نظام إدارة المخازن المبردة والثلاجات" />
+<meta property="og:description" content="تتبع حراري لحظي لكل عنبر، باركود لكل بالية، صرف FEFO يمنع الهالك، وتطبيق تابلت للسواقين — نظام واحد بالعربي لإدارة الثلاجات والمخازن المبردة." />
+<meta property="og:image" content="https://www.coolstock.store/assets/og-cover.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="لوحة تحكم CoolStock لإدارة المخازن المبردة" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="CoolStock | نظام إدارة المخازن المبردة والثلاجات" />
+<meta name="twitter:description" content="تتبع حراري لحظي، باركود لكل بالية، صرف FEFO، وتطبيق تابلت للسواقين — نظام واحد بالعربي لإدارة الثلاجات والمخازن المبردة." />
+<meta name="twitter:image" content="https://www.coolstock.store/assets/og-cover.png" />
+
+<meta name="theme-color" content="#0B1F2A" />
+<meta name="format-detection" content="telephone=no" />
+
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png" />
+
+<!-- ====== الأداء: الخطوط والصورة الرئيسية ====== -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preload" as="image" href="assets/dashboard.webp" fetchpriority="high" />
 <link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@300;400;500;600;700;800&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <style>
   :root{
@@ -28,13 +69,33 @@
     font-family:'Readex Pro','IBM Plex Sans Arabic',Tahoma,sans-serif;
     -webkit-font-smoothing:antialiased; overflow-x:hidden;
   }
-  img{max-width:100%; display:block;}
+  img{max-width:100%; height:auto; display:block;}
   a{color:inherit; text-decoration:none;}
   ul{list-style:none;}
   .mono{font-family:'JetBrains Mono',monospace; font-feature-settings:'tnum';}
   .container{max-width:1260px; margin:0 auto; padding:0 28px;}
   section{position:relative;}
   ::selection{background:var(--primary); color:#fff;}
+  /* ---------- scrollbar ---------- */
+  /* Firefox فقط — لو اتحطت في كروم هتلغي تنسيق ::-webkit-scrollbar وتضيّع التدرّج */
+  @supports not selector(::-webkit-scrollbar){
+    html{scrollbar-width:thin; scrollbar-color:var(--primary) var(--line-2);}
+  }
+  /* Chrome / Edge / Safari */
+  ::-webkit-scrollbar{width:14px; height:14px;}
+  ::-webkit-scrollbar-track{background:var(--line-2); border-radius:99px;}
+  ::-webkit-scrollbar-thumb{
+    background:linear-gradient(180deg,var(--accent),var(--primary));
+    border-radius:99px;
+    border:3px solid transparent;   /* يخلّي الإبهام أنحف والاستدارة أوضح */
+    background-clip:padding-box;
+  }
+  ::-webkit-scrollbar-thumb:hover{
+    background:linear-gradient(180deg,#3fcadf,var(--primary-2));
+    background-clip:padding-box;
+  }
+  ::-webkit-scrollbar-corner{background:transparent;}
+
 
   /* ---------- reveal animation ---------- */
   .reveal{opacity:0; transform:translateY(28px); transition:opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1);}
@@ -52,7 +113,7 @@
   .nav.scrolled{background:rgba(11,31,42,.92); box-shadow:0 10px 30px -14px rgba(0,0,0,.5);}
   .nav-inner{display:flex; align-items:center; gap:20px; height:68px;}
   .brand{display:flex; align-items:center; gap:10px; margin-inline-end:auto;}
-  .brand-mark{width:36px; height:36px; border-radius:10px; background:linear-gradient(140deg,var(--accent),var(--primary)); display:grid; place-items:center; font-size:16px; box-shadow:inset 0 -8px 14px rgba(0,0,0,.18);}
+  .brand-mark{width:38px; height:38px; object-fit:contain; flex-shrink:0;}
   .brand-text{display:flex; flex-direction:column; line-height:1.15;}
   .brand-name{color:#fff; font-weight:700; font-size:15px;}
   .brand-sub{color:#8fa4ad; font-size:10.5px; letter-spacing:.03em;}
@@ -61,6 +122,14 @@
   .nav-links a:hover{color:#fff; background:rgba(255,255,255,.06);}
   .nav-cta{background:var(--accent); color:#06222a; font-weight:700; font-size:13px; padding:10px 18px; border-radius:9px; white-space:nowrap; transition:.15s; box-shadow:0 8px 20px -8px rgba(22,182,207,.6);}
   .nav-cta:hover{background:#3fcadf; transform:translateY(-1px);}
+  .nav-lang{
+    display:inline-flex; align-items:center; gap:6px; white-space:nowrap;
+    color:#c3d1d7; font-size:12.5px; font-weight:700; padding:8px 12px; border-radius:9px;
+    border:1px solid rgba(255,255,255,.16); background:rgba(255,255,255,.05); transition:.15s;
+  }
+  .nav-lang:hover{color:#fff; background:rgba(255,255,255,.12); border-color:rgba(255,255,255,.3);}
+  .nav-lang svg{width:15px; height:15px; flex-shrink:0; stroke:currentColor; fill:none; stroke-width:2;}
+  @media (max-width:420px){ .nav-lang span{display:none;} .nav-lang{padding:8px 10px;} }
   @media (max-width:920px){ .nav-links{display:none;} }
 
   /* ---------- buttons / chips ---------- */
@@ -171,16 +240,15 @@
   .tablet-wrap{background:linear-gradient(180deg, var(--ink), #0d2a37); border-radius:28px; padding:64px 40px;}
   .tablet-wrap .section-head h2, .tablet-wrap .section-head p{color:#fff;}
   .tablet-wrap .section-head p{color:#a9bcc3;}
-  .tablet-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:22px;}
-  @media (max-width:1100px){.tablet-grid{grid-template-columns:repeat(2,1fr);}}
-  @media (max-width:560px){.tablet-grid{grid-template-columns:1fr;}}
-  .tablet-card{background:#0f2b36; border:1px solid rgba(255,255,255,.08); border-radius:18px; padding:14px; transition:transform .25s;}
+  .tablet-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:26px;}
+  @media (max-width:760px){.tablet-grid{grid-template-columns:1fr;}}
+  .tablet-card{background:#0f2b36; border:1px solid rgba(255,255,255,.08); border-radius:18px; padding:18px; transition:transform .25s;}
   .tablet-card:hover{transform:translateY(-6px);}
   .tablet-frame{border-radius:11px; overflow:hidden; border:1px solid rgba(255,255,255,.1); box-shadow:0 20px 40px -18px rgba(0,0,0,.6);}
-  .tablet-frame img{cursor:zoom-in;}
+  .tablet-frame img{width:100%; height:auto; cursor:zoom-in;}
   .tablet-card .num{color:var(--accent); font-family:'JetBrains Mono',monospace; font-size:12px; font-weight:600;}
-  .tablet-card h5{color:#fff; font-size:15px; font-weight:700; margin:8px 0 6px;}
-  .tablet-card p{color:#9fb3ba; font-size:12.5px; line-height:1.7;}
+  .tablet-card h5{color:#fff; font-size:17px; font-weight:700; margin:10px 0 7px;}
+  .tablet-card p{color:#9fb3ba; font-size:13.5px; line-height:1.75;}
 
   /* advantages grid */
   .adv-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:22px;}
@@ -229,17 +297,288 @@
   .lightbox-close:hover{background:rgba(255,255,255,.16);}
 
   h1,h2,h3,h4,h5{letter-spacing:-.01em;}
+
+  /* ---------- use cases (SEO content) ---------- */
+  .uc-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
+  @media (max-width:980px){.uc-grid{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:620px){.uc-grid{grid-template-columns:1fr;}}
+  .uc-card{background:var(--surface); border:1px solid var(--line); border-radius:18px; padding:24px; transition:.2s;}
+  .uc-card:hover{box-shadow:var(--shadow-md); transform:translateY(-4px); border-color:transparent;}
+  .uc-card .uc-emoji{font-size:24px; line-height:1; margin-bottom:12px; display:block;}
+  .uc-card h3{font-size:17px; font-weight:700; margin-bottom:9px;}
+  .uc-card p{font-size:13.5px; color:var(--ink-3); line-height:1.8;}
+
+  /* ---------- rich intro prose ---------- */
+  .prose{max-width:860px; margin-inline:auto;}
+  .prose p{font-size:15.5px; color:var(--ink-3); line-height:2.05; margin-bottom:18px;}
+  .prose p b{color:var(--ink-2);}
+  .prose h3{font-size:20px; font-weight:800; margin:30px 0 12px; color:var(--ink);}
+
+  /* ---------- FAQ ---------- */
+  .faq{max-width:860px; margin-inline:auto; display:flex; flex-direction:column; gap:12px;}
+  .faq details{background:var(--surface); border:1px solid var(--line); border-radius:14px; overflow:hidden; transition:.2s;}
+  .faq details[open]{border-color:var(--primary); box-shadow:var(--shadow-md);}
+  .faq summary{
+    list-style:none; cursor:pointer; padding:20px 22px; font-size:15.5px; font-weight:700; color:var(--ink);
+    display:flex; align-items:center; gap:12px;
+  }
+  .faq summary::-webkit-details-marker{display:none;}
+  .faq summary::after{
+    content:'+'; margin-inline-start:auto; font-size:22px; font-weight:400; color:var(--primary);
+    line-height:1; transition:transform .2s;
+  }
+  .faq details[open] summary::after{content:'−';}
+  .faq summary:hover{background:var(--surface-2);}
+  .faq .faq-a{padding:0 22px 22px; font-size:14.5px; color:var(--ink-3); line-height:2;}
+  .faq .faq-a b{color:var(--ink-2);}
+
+  /* ---------- expanded footer ---------- */
+  .foot-grid{display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:36px; text-align:start; padding-bottom:28px; border-bottom:1px solid var(--line);}
+  @media (max-width:760px){.foot-grid{grid-template-columns:1fr; gap:26px;}}
+  .foot-logo{width:150px; height:auto; margin-bottom:14px;}
+  .foot-grid h4{font-size:14px; font-weight:700; color:var(--ink-2); margin-bottom:12px;}
+  .foot-grid p{font-size:13px; color:var(--ink-3); line-height:1.95;}
+  .foot-grid ul{display:flex; flex-direction:column; gap:8px;}
+  .foot-grid ul a{font-size:13px; color:var(--ink-3); transition:.15s;}
+  .foot-grid ul a:hover{color:var(--primary);}
+  .foot-bottom{padding-top:20px; display:flex; gap:14px; justify-content:space-between; flex-wrap:wrap; align-items:center;}
+  .foot-bottom .lang a{color:var(--primary); font-weight:600;}
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://www.coolstock.store/#organization",
+      "name": "CoolStock",
+      "alternateName": "كوول ستوك",
+      "url": "https://www.coolstock.store/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.coolstock.store/assets/logo-mark.png",
+        "width": 512,
+        "height": 512
+      },
+      "email": "sales@coolstock.store",
+      "areaServed": [
+        {
+          "@type": "Country",
+          "name": "Egypt"
+        },
+        {
+          "@type": "Country",
+          "name": "Saudi Arabia"
+        },
+        {
+          "@type": "Country",
+          "name": "United Arab Emirates"
+        },
+        {
+          "@type": "Country",
+          "name": "Kuwait"
+        },
+        {
+          "@type": "Country",
+          "name": "Qatar"
+        }
+      ],
+      "knowsLanguage": [
+        "ar",
+        "en"
+      ],
+      "description": "مطوّر CoolStock، نظام إدارة المخازن المبردة وثلاجات الحفظ وسلاسل التبريد."
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://www.coolstock.store/#website",
+      "url": "https://www.coolstock.store/",
+      "name": "CoolStock — نظام إدارة المخازن المبردة",
+      "inLanguage": "ar",
+      "publisher": {
+        "@id": "https://www.coolstock.store/#organization"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://www.coolstock.store/#webpage",
+      "url": "https://www.coolstock.store/",
+      "name": "CoolStock | نظام إدارة المخازن المبردة والثلاجات",
+      "isPartOf": {
+        "@id": "https://www.coolstock.store/#website"
+      },
+      "about": {
+        "@id": "https://www.coolstock.store/#software"
+      },
+      "inLanguage": "ar",
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "https://www.coolstock.store/assets/og-cover.png"
+      },
+      "description": "برنامج إدارة مخازن مبردة وثلاجات حفظ بالعربي: تتبع درجة الحرارة لحظيًا، باركود لكل بالية، نظام صرف FEFO، خريطة مخزون حية، فوترة عملاء، وتطبيق تابلت للسواقين."
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://www.coolstock.store/#software",
+      "name": "CoolStock",
+      "alternateName": "كوول ستوك",
+      "applicationCategory": "BusinessApplication",
+      "applicationSubCategory": "Warehouse Management System",
+      "operatingSystem": "Web, Windows, Android, iOS",
+      "url": "https://www.coolstock.store/",
+      "inLanguage": [
+        "ar",
+        "en"
+      ],
+      "screenshot": [
+        "https://www.coolstock.store/assets/dashboard.png",
+        "https://www.coolstock.store/assets/livemap.png",
+        "https://www.coolstock.store/assets/warehouses.png",
+        "https://www.coolstock.store/assets/dispatch.png"
+      ],
+      "description": "نظام إدارة مخازن مبردة يوفّر تتبّع درجة الحرارة لحظيًا لكل عنبر، باركود وQR فريد لكل بالية، صرف بنظام FEFO لمنع هلاك البضاعة، خريطة مخزون حية، إدارة عقود عملاء التخزين البارد وفوترتهم تلقائيًا، وتطبيق تابلت مخصّص لسواقين التوصيل والمناولة.",
+      "featureList": [
+        "تتبّع درجة الحرارة لحظيًا لكل عنبر مع تنبيهات الخروج عن المدى المسموح",
+        "باركود وQR تلقائي وفريد لكل بالية",
+        "نظام صرف FEFO يمنع هلاك البضاعة",
+        "خريطة مخزون حية تُظهر موقع كل بالية",
+        "باني خرائط مخازن بدون برمجة",
+        "تطبيق تابلت مخصّص لسواقين التوصيل والمناولة",
+        "إدارة عقود عملاء التخزين البارد وأرصدتهم",
+        "فوترة تلقائية ومتابعة تحصيل",
+        "تقارير تشغيلية ومالية قابلة للتصدير PDF وExcel",
+        "صلاحيات مستخدمين مرنة حسب الدور"
+      ],
+      "publisher": {
+        "@id": "https://www.coolstock.store/#organization"
+      },
+      "offers": {
+        "@type": "Offer",
+        "availability": "https://schema.org/InStock",
+        "priceCurrency": "EGP",
+        "price": "0",
+        "description": "عرض تجريبي مباشر مجاني — التسعير حسب عدد المخازن وحجم التشغيل."
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://www.coolstock.store/#faq",
+      "inLanguage": "ar",
+      "isPartOf": {
+        "@id": "https://www.coolstock.store/#webpage"
+      },
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "إيه هو نظام إدارة المخازن المبردة بالظبط؟",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "نظام إدارة المخازن المبردة (Cold Storage WMS) هو برنامج بيدير كل عمليات الثلاجة أو المخزن المبرد رقميًا: استلام الشحنات، تحديد مكان تخزين كل بالية، تتبّع درجة الحرارة، ترتيب الصرف حسب الصلاحية، والفوترة. الفرق بينه وبين نظام المخازن العادي إنه بيتعامل مع الحرارة والصلاحية كعوامل أساسية مش بيانات إضافية — وده اللي بيمنع هلاك البضاعة ويخلّي كل حركة موثّقة."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "يعني إيه نظام FEFO وليه مهم في التخزين البارد؟",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "FEFO اختصار لـ First Expired, First Out — يعني الأقرب انتهاءً يتصرف الأول، مش الأقدم دخولًا زي نظام FIFO. في البضاعة المبردة دي نقطة حاسمة: ممكن شحنة دخلت متأخر لكن صلاحيتها أقرب. النظام بيرتّب أوامر الصرف تلقائيًا على أساس تاريخ الصلاحية ويمنع الصرف الخاطئ، فبتقلّل الهالك بشكل ملموس من أول شهور التشغيل."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "النظام بيتابع درجة حرارة الثلاجات إزاي؟",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "كل عنبر بيتحدّدله درجة حرارة مستهدفة ومدى مسموح. النظام بيعرض الحرارة الحالية لكل عنبر على الداشبورد لحظيًا، وبيطلق تنبيه فوري لو خرجت عن المدى. وكل قراءة بتتسجّل في سجل تاريخي تقدر ترجعله وقت المراجعة أو التدقيق أو لو حصل خلاف مع عميل على حالة بضاعته."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "هل النظام بيشتغل على أكتر من مخزن أو فرع؟",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "أيوه. تقدر تدير عدد غير محدود من المخازن والعنابر من نفس الحساب، وكل مخزن ليه خريطته ودرجات حرارته وصلاحياته. الإدارة بتشوف كل الفروع في شاشة واحدة، ومشرف كل مخزن بيشوف مخزنه بس. والنقل بين العنابر أو بين الفروع بيتسجّل كحركة كاملة بالمستخدم والوقت."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "محتاج أجهزة خاصة عشان أشغّل النظام؟",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "لأ. النظام بيشتغل من المتصفح على أي كمبيوتر، وتطبيق التابلت للسواقين والمناولة بيشتغل على تابلت عادي. لمسح الباركود تقدر تستخدم كاميرا التابلت أو قارئ باركود عادي (USB أو بلوتوث). لو عندك حساسات حرارة موجودة بالفعل، بنقدر نربطها بالنظام بدل الإدخال اليدوي."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "هل فيه فوترة وإدارة لعملاء التخزين؟",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "أيوه، لو بتأجّر مساحات تبريد للغير. لكل عميل ملف فيه عقده وأسعاره المتفق عليها، وكل الباليتات المخزّنة باسمه. النظام بيحسب الفاتورة تلقائيًا على أساس مدة التخزين وعدد الباليتات والخدمات الإضافية، وبيتابع المدفوع والمستحق فمفيش فاتورة بتفوت عليك."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "إيه اللي بيحصل لبيانات المخزن الموجودة عندي دلوقتي؟",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "بنبدأ بجلسة تجهيز بنرسم فيها خريطة مخازنك الفعلية جوّه النظام (عنابر، ممرات، رفوف)، وبعدين بنرفّع رصيدك الحالي من ملفات Excel أو من نظامك القديم. بعد الرفع بيتطبع باركود لكل بالية موجودة وتتربط بموقعها على الخريطة، وتبقى شغّال من أول يوم."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "التنفيذ والتدريب بياخدوا قد إيه؟",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "بيعتمد على حجم المخازن وعدد الأصناف، لكن التنفيذ النموذجي لمخزن واحد بياخد من أسبوعين لشهر شامل تجهيز الخرائط ورفع الأرصدة وتدريب الفريق. التدريب بيتم على مجموعات حسب الدور — إدارة، مشرف مخزن، محاسب، وسواقين — وبيفضل معاك دعم فني بعد التشغيل."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "النظام بالعربي ولا مترجم؟",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "النظام اتبنى بالعربي من الأساس بواجهة RTL كاملة — مش نسخة مترجمة من نظام أجنبي. ده بيفرق في المصطلحات (بالية، عنبر، أمر صرف)، في اتجاه الشاشات والتقارير، وفي سهولة استخدام العمالة للتطبيق جوّه المخزن من غير حاجز لغة. وفيه واجهة إنجليزية متاحة كمان لو فريقك مختلط."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.coolstock.store/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "الرئيسية",
+          "item": "https://www.coolstock.store/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "نظام إدارة المخازن المبردة",
+          "item": "https://www.coolstock.store/#dashboard"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "الأسئلة الشائعة",
+          "item": "https://www.coolstock.store/#faq"
+        }
+      ]
+    }
+  ]
+}
+</script>
 </head>
 <body>
 
 <nav class="nav" id="nav">
   <div class="container nav-inner">
     <div class="brand">
-      <div class="brand-mark">❄️</div>
+      <img class="brand-mark" src="assets/logo-mark.png" alt="شعار CoolStock" width="512" height="512" />
       <div class="brand-text">
-        <span class="brand-name">سيستم التلاجات</span>
-        <span class="brand-sub">Cold Storage WMS</span>
+        <span class="brand-name">CoolStock</span>
+        <span class="brand-sub">نظام إدارة المخازن المبردة</span>
       </div>
     </div>
     <div class="nav-links">
@@ -248,8 +587,10 @@
       <a href="#operations">العمليات</a>
       <a href="#driver">تطبيق السواق</a>
       <a href="#business">العملاء والفواتير</a>
-      <a href="#why">ليه سيستم التلاجات</a>
+      <a href="#usecases">مين بيستخدمه</a>
+      <a href="#faq">أسئلة شائعة</a>
     </div>
+    <a class="nav-lang" href="en/" hreflang="en" lang="en" title="English version" aria-label="Switch to English"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 010 18M12 3a14 14 0 000 18"/></svg><span>EN</span></a>
     <a href="#contact" class="nav-cta">احجز عرض تجريبي</a>
   </div>
 </nav>
@@ -262,7 +603,7 @@
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M2 12h20M4.9 4.9l14.2 14.2M19.1 4.9L4.9 19.1"/></svg>
         منصة متكاملة لإدارة المخازن المبردة
       </span>
-      <h1>تحكّم كامل في كل تلاجة، كل باليت، وكل درجة حرارة — <span>من شاشة واحدة</span></h1>
+      <h1>تحكّم كامل في كل ثلاجة، كل باليت، وكل درجة حرارة — <span>من شاشة واحدة</span></h1>
       <p class="lead">
         من لحظة استلام الشحنة لحد تسليمها للعميل: تتبع حراري لحظي لكل عنبر، باركود وQR تلقائي لكل بالية،
         نظام صرف ذكي يمنع هلاك البضاعة قبل ما يحصل، وتطبيق مخصص لسواقين التوصيل — كله في نظام واحد بالعربي.
@@ -291,7 +632,7 @@
               app.cold-storage-wms.com/dashboard
             </div>
           </div>
-          <img src="assets/dashboard.png" alt="لوحة التحكم التشغيلية" loading="eager" />
+          <img src="assets/dashboard.webp" alt="لوحة تحكم نظام إدارة المخازن المبردة — نسب امتلاء العنابر ودرجات الحرارة اللحظية" width="1680" height="1050" loading="eager" fetchpriority="high" decoding="async" />
         </div>
       </div>
     </div>
@@ -313,6 +654,12 @@
 <!-- ============ DASHBOARD ============ -->
 <section class="section" id="dashboard">
   <div class="container">
+    <div class="section-head center reveal">
+      <span class="eyebrow">لوحة التحكم</span>
+      <h2>لوحة تحكم واحدة لكل ثلاجاتك ومخازنك المبردة</h2>
+      <p>بدل ما تلف على العنابر أو تتصل بمشرف كل مخزن عشان تعرف الوضع، <b>CoolStock</b> بيجمّع
+        حالة كل مخزن مبرد — الحرارة، نسبة الامتلاء، التنبيهات، وآخر الحركات — في شاشة واحدة بتتحدّث لحظيًا.</p>
+    </div>
     <div class="feature-row">
       <div class="copy reveal">
         <span class="eyebrow">الداشبورد التشغيلي</span>
@@ -320,10 +667,10 @@
         <p>مش محتاج تدوّر بين شاشات عشان تعرف إيه اللي محتاج تدخل عليه. الداشبورد بيلخصلك حالة المخازن كلها،
           التنبيهات المهمة، وآخر الحركات، بشكل بصري واضح.</p>
         <ul class="check-list">
-          <li><span class="check-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span> تنبيهات فورية للنواقص، الصلاحيات القريبة، ونسب الامتلاء المرتفعة</li>
+          <li><span class="check-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span> تنبيهات فورية للنواقص، تواريخ الصلاحية القريبة، ونسب الامتلاء المرتفعة</li>
           <li><span class="check-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span> نسبة امتلاء كل عنبر لحظيًا مع <b>درجة الحرارة الحالية والمستهدفة</b></li>
           <li><span class="check-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span> سجل كامل لآخر العمليات: تخزين، صرف، نقل — بالمستخدم والوقت</li>
-          <li><span class="check-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span> تنبيه بالأصناف القريبة من انتهاء الصلاحية خلال 7 أيام</li>
+          <li><span class="check-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span> تنبيه بالأصناف القريبة من انتهاء الصلاحية خلال ٧ أيام</li>
         </ul>
       </div>
       <div class="media reveal reveal-delay-1">
@@ -333,7 +680,7 @@
               <div class="frame-dots"><span></span><span></span><span></span></div>
               <div class="frame-url"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg> /dashboard</div>
             </div>
-            <img src="assets/dashboard.png" alt="لوحة التحكم" />
+            <img src="assets/dashboard.webp" alt="لوحة تحكم نظام إدارة المخازن المبردة — نسب امتلاء العنابر ودرجات الحرارة اللحظية" width="1680" height="1050" loading="lazy" decoding="async" />
           </div>
         </div>
       </div>
@@ -364,7 +711,7 @@
               <div class="frame-dots"><span></span><span></span><span></span></div>
               <div class="frame-url"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg> /warehouses</div>
             </div>
-            <img src="assets/warehouses.png" alt="إدارة العنابر" />
+            <img src="assets/warehouses.webp" alt="شاشة إدارة العنابر والمخازن المبردة مع درجة الحرارة المستهدفة لكل عنبر" width="1680" height="1050" loading="lazy" decoding="async" />
           </div>
         </div>
       </div>
@@ -389,7 +736,7 @@
               <div class="frame-dots"><span></span><span></span><span></span></div>
               <div class="frame-url"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg> /live-map</div>
             </div>
-            <img src="assets/livemap.png" alt="الخريطة الحية" />
+            <img src="assets/livemap.webp" alt="خريطة مخزون حية توضح موقع كل بالية داخل الثلاجة لحظة بلحظة" width="1680" height="1050" loading="lazy" decoding="async" />
           </div>
         </div>
       </div>
@@ -397,10 +744,10 @@
 
     <div class="feature-row rev">
       <div class="copy reveal">
-        <span class="eyebrow">بانى الخرائط</span>
+        <span class="eyebrow">باني الخرائط</span>
         <h3>صمّم مخزنك بنفسك... من غير ولا سطر برمجة</h3>
         <p>أداة سحب وإفلات بسيطة تسمحلك ترسم شبكة التخزين، تحدد الممرات والأبواب والأعمدة،
-          وتشوف الإحصائيات (السعة، عدد الأماكن) وانت لسه بتصمم.</p>
+          وتشوف الإحصائيات (السعة، عدد الأماكن) وإنت لسه بتصمم.</p>
         <ul class="check-list">
           <li><span class="check-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span> قوالب جاهزة لأشكال العنابر الشائعة أو تصميم حر بالكامل</li>
           <li><span class="check-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span> تخصيص مناطق بالكامل لعميل معين داخل نفس العنبر</li>
@@ -414,7 +761,7 @@
               <div class="frame-dots"><span></span><span></span><span></span></div>
               <div class="frame-url"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg> /layout-builder</div>
             </div>
-            <img src="assets/layoutbuilder.png" alt="بانى الخرائط" />
+            <img src="assets/layoutbuilder.webp" alt="باني خرائط المخازن — تصميم مخطط الثلاجة والرفوف بدون برمجة" width="1680" height="1050" loading="lazy" decoding="async" />
           </div>
         </div>
       </div>
@@ -428,7 +775,7 @@
     <div class="section-head reveal">
       <span class="eyebrow">دورة العمليات اليومية</span>
       <h2>من استلام الشحنة لحد تسليمها... خطوات مضبوطة من غير ورق</h2>
-      <p>كل عملية في المخزن — استلام، تخزين، صرف، نقل — بتتسجل تلقائيًا بالباركود، وبتتحدث الخريطة والداشبورد
+      <p>كل عملية في المخزن — استلام، تخزين، صرف، نقل — بتتسجل تلقائيًا بالباركود، وبتتحدّث الخريطة والداشبورد
         فورًا من غير أي تدخل يدوي.</p>
     </div>
 
@@ -444,7 +791,7 @@
       <div class="split-card">
         <div class="frame">
           <div class="frame-bar"><div class="frame-dots"><span></span><span></span><span></span></div><div class="frame-url">/receive-shipment</div></div>
-          <img src="assets/receive.png" alt="استلام شحنة جديدة" />
+          <img src="assets/receive.webp" alt="شاشة استلام شحنة جديدة في نظام إدارة الثلاجات وتسجيل بيانات الصلاحية" width="1680" height="1050" loading="lazy" decoding="async" />
         </div>
         <h4>استلام شحنة في دقايق</h4>
         <p>تسجيل الشحنة والمورد وفاتورة الشراء، وتحديد الفئة والوزن وتاريخ الانتهاء لكل صنف — والسيستم يجهز الباركودات ويقترح أماكن التخزين المناسبة للحرارة المطلوبة تلقائيًا.</p>
@@ -452,7 +799,7 @@
       <div class="split-card">
         <div class="frame">
           <div class="frame-bar"><div class="frame-dots"><span></span><span></span><span></span></div><div class="frame-url">/barcodes</div></div>
-          <img src="assets/barcodes.png" alt="باركودات الشحنة" />
+          <img src="assets/barcodes.webp" alt="طباعة باركود وQR فريد لكل بالية مخزنة في المخزن المبرد" width="1680" height="1050" loading="lazy" decoding="async" />
         </div>
         <h4>باركود وQR فريد لكل بالية</h4>
         <p>توليد وطباعة ستيكرات بمقاسات مختلفة، بمعاينة قبل الطباعة، ودعم كامل لطابعات الحرارة (TSC, Zebra) وتصدير CSV لأي نظام تاني.</p>
@@ -479,7 +826,7 @@
               <div class="frame-dots"><span></span><span></span><span></span></div>
               <div class="frame-url"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg> /dispatch-orders</div>
             </div>
-            <img src="assets/dispatch.png" alt="أمر صرف جديد بنظام FEFO" />
+            <img src="assets/dispatch.webp" alt="أمر صرف بنظام FEFO لمنع هلاك البضاعة في المخازن المبردة" width="1680" height="1050" loading="lazy" decoding="async" />
           </div>
         </div>
       </div>
@@ -499,25 +846,25 @@
       </div>
       <div class="tablet-grid">
         <div class="tablet-card">
-          <div class="tablet-frame"><img src="assets/tablet_home.png" alt="الرئيسية - تابلت السواق" /></div>
+          <div class="tablet-frame"><img src="assets/tablet_home.webp" alt="الشاشة الرئيسية لتطبيق التابلت المخصص لسواقين المخازن المبردة" width="1680" height="1050" loading="lazy" decoding="async" /></div>
           <span class="num">01</span>
           <h5>مهام اليوم</h5>
           <p>كل المهام المطلوبة من السواق مرتبة ومحدثة لحظيًا من الإدارة</p>
         </div>
         <div class="tablet-card">
-          <div class="tablet-frame"><img src="assets/tablet_map.png" alt="خريطة المخزن - تابلت السواق" /></div>
+          <div class="tablet-frame"><img src="assets/tablet_map.webp" alt="خريطة المخزن داخل تطبيق تابلت السواق لتحديد موقع التخزين" width="1680" height="1050" loading="lazy" decoding="async" /></div>
           <span class="num">02</span>
           <h5>خريطة المخزن</h5>
           <p>يشوف أقرب الأماكن الفاضية وتفاصيل أي بالية وهو واقف قدامها</p>
         </div>
         <div class="tablet-card">
-          <div class="tablet-frame"><img src="assets/tablet_scan.png" alt="مسح باركود - تابلت السواق" /></div>
+          <div class="tablet-frame"><img src="assets/tablet_scan.webp" alt="مسح باركود الباليتات عبر تطبيق التابلت داخل الثلاجة" width="1680" height="1050" loading="lazy" decoding="async" /></div>
           <span class="num">03</span>
           <h5>مسح باركود</h5>
           <p>مسح البالية والسيستم يقترح مكان التخزين المناسب تلقائيًا</p>
         </div>
         <div class="tablet-card">
-          <div class="tablet-frame"><img src="assets/tablet_transfer.png" alt="نقل بين عنابر - تابلت السواق" /></div>
+          <div class="tablet-frame"><img src="assets/tablet_transfer.webp" alt="نقل باليتات بين عنابر التبريد من تطبيق تابلت السواق" width="1680" height="1050" loading="lazy" decoding="async" /></div>
           <span class="num">04</span>
           <h5>نقل بين عنابر</h5>
           <p>تأكيد الخروج والوصول بخطوتين بس، مع تسجيل سبب النقل</p>
@@ -551,7 +898,7 @@
         <div class="frame-shell">
           <div class="frame">
             <div class="frame-bar"><div class="frame-dots"><span></span><span></span><span></span></div><div class="frame-url">/customers</div></div>
-            <img src="assets/customers.png" alt="إدارة العملاء والعقود" />
+            <img src="assets/customers.webp" alt="إدارة عملاء التخزين البارد وعقودهم وأرصدة الباليتات" width="1680" height="1050" loading="lazy" decoding="async" />
           </div>
         </div>
       </div>
@@ -571,7 +918,7 @@
         <div class="frame-shell">
           <div class="frame">
             <div class="frame-bar"><div class="frame-dots"><span></span><span></span><span></span></div><div class="frame-url">/invoices</div></div>
-            <img src="assets/invoices.png" alt="الفواتير" />
+            <img src="assets/invoices.webp" alt="الفوترة التلقائية لخدمات التخزين المبرد ومتابعة التحصيل" width="1680" height="1050" loading="lazy" decoding="async" />
           </div>
         </div>
       </div>
@@ -582,7 +929,7 @@
         <span class="eyebrow">التقارير والتحليلات</span>
         <h3>تقارير جاهزة تدعم قرارك... مش بس أرقام على الشاشة</h3>
         <ul class="check-list">
-          <li><span class="check-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span> تقارير حركة الأصناف، الامتلاء، الصلاحيات، وأداء العمالة</li>
+          <li><span class="check-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span> تقارير حركة الأصناف، الامتلاء، تواريخ الصلاحية، وأداء العمالة</li>
           <li><span class="check-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span> فلترة سريعة بالفترة الزمنية (يوم / أسبوع / ربع / سنة)</li>
           <li><span class="check-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 6L9 17l-5-5"/></svg></span> تصدير مباشر PDF أو Excel لأي تقرير بضغطة واحدة</li>
         </ul>
@@ -591,10 +938,60 @@
         <div class="frame-shell">
           <div class="frame">
             <div class="frame-bar"><div class="frame-dots"><span></span><span></span><span></span></div><div class="frame-url">/reports</div></div>
-            <img src="assets/reports.png" alt="التقارير" />
+            <img src="assets/reports.webp" alt="تقارير تشغيلية ومالية جاهزة للتصدير PDF وExcel لإدارة المخازن المبردة" width="1680" height="1050" loading="lazy" decoding="async" />
           </div>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ USE CASES (SEO) ============ -->
+<section class="section" id="usecases">
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="eyebrow">مين بيستخدم النظام؟</span>
+      <h2>مصمم لكل نشاط بيعتمد على التخزين المبرد</h2>
+      <p>اختلاف طبيعة البضاعة بيغيّر طريقة التخزين والصرف والرقابة. النظام بيتظبط على نشاطك،
+        مش العكس — من ثلاجات الخضار والفاكهة لحد مخازن الأدوية المتحكم في حرارتها.</p>
+    </div>
+    <div class="uc-grid reveal reveal-delay-1">
+      <article class="uc-card">
+        <span class="uc-emoji">🥬</span>
+        <h3>ثلاجات حفظ الخضار والفاكهة</h3>
+        <p>بضاعة موسمية وصلاحية قصيرة بتخلّي ترتيب الصرف مسألة ربح أو خسارة. نظام <b>FEFO</b> بيصرف
+          الأقرب انتهاءً أولًا تلقائيًا، والتنبيهات بتوصلك قبل انتهاء الصلاحية بأيام مش بعدها.</p>
+      </article>
+      <article class="uc-card">
+        <span class="uc-emoji">🥩</span>
+        <h3>مخازن اللحوم والدواجن والأسماك</h3>
+        <p>تجميد عميق بيتطلب رقابة حرارة ما بتنامش. النظام بيسجّل درجة حرارة كل عنبر لحظيًا
+          وبينبّه فورًا لو خرجت عن المدى المسموح، مع سجل كامل يصلح كدليل رقابي.</p>
+      </article>
+      <article class="uc-card">
+        <span class="uc-emoji">💊</span>
+        <h3>مستودعات الأدوية والمستحضرات</h3>
+        <p>تتبّع دقيق للتشغيلة (Batch) وتاريخ الصلاحية لكل بالية، وسجل حركة كامل بالمستخدم والوقت —
+          الأساس اللي بيخلّي إجراءات التخزين الدوائي قابلة للمراجعة والتدقيق.</p>
+      </article>
+      <article class="uc-card">
+        <span class="uc-emoji">🏭</span>
+        <h3>مصانع الأغذية والمنتجات المجمدة</h3>
+        <p>ربط بين الإنتاج والتخزين: استلام الإنتاج اليومي بباركود تلقائي، وتخزينه في العنبر
+          المناسب بمعرفة النظام لمساحته الفاضية ودرجة حرارته.</p>
+      </article>
+      <article class="uc-card">
+        <span class="uc-emoji">📦</span>
+        <h3>شركات التخزين البارد للغير</h3>
+        <p>لو بتأجّر مساحات تبريد لعملاء، هتلاقي ملف لكل عميل بعقده وأسعاره، ورصيد الباليتات
+          بتاعته، و<b>فوترة تلقائية</b> على أساس مدة التخزين وعدد الباليتات.</p>
+      </article>
+      <article class="uc-card">
+        <span class="uc-emoji">🚚</span>
+        <h3>الشركات اللوجستية وسلاسل التبريد</h3>
+        <p>من استلام الشحنة لحد تسليمها: أوامر صرف مرتبة، تطبيق تابلت للسواقين يقودهم لموقع
+          الباليت جوّه المخزن، وتأكيد تسليم موثّق بالباركود.</p>
+      </article>
     </div>
   </div>
 </section>
@@ -603,7 +1000,7 @@
 <section class="section alt" id="why">
   <div class="container">
     <div class="section-head center reveal">
-      <span class="eyebrow">ليه سيستم التلاجات؟</span>
+      <span class="eyebrow">ليه CoolStock؟</span>
       <h2>مش نظام مخازن عام... اتصمم خصيصًا لسلسلة التبريد</h2>
       <p>فيه فرق كبير بين نظام WMS عادي، ونظام مبني من الأول عشان يفهم احتياجات التخزين البارد.</p>
     </div>
@@ -631,13 +1028,100 @@
       <div class="adv-card">
         <div class="adv-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
         <h4>تحديثات لحظية بلا تحديث صفحة</h4>
-        <p>أي حركة تخزين أو صرف أو نقل تتحدث فورًا على الخريطة والداشبورد لكل المستخدمين.</p>
+        <p>أي حركة تخزين أو صرف أو نقل تتحدّث فورًا على الخريطة والداشبورد لكل المستخدمين.</p>
       </div>
       <div class="adv-card">
         <div class="adv-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg></div>
         <h4>تنفيذ وتدريب متكامل</h4>
-        <p>مش بس نبيعلك النظام — بنساعدك تجهزه على مخازنك فعليًا ونمود فريقك بالتدريب اللازم.</p>
+        <p>مش بس نبيعلك النظام — بنساعدك تجهزه على مخازنك فعليًا ونمدّ فريقك بالتدريب اللازم.</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ (SEO) ============ -->
+<section class="section alt" id="faq">
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="eyebrow">أسئلة شائعة</span>
+      <h2>أسئلة بنسمعها كتير عن نظام إدارة المخازن المبردة</h2>
+      <p>لو سؤالك مش موجود هنا، ابعتلنا وهنرد عليك بتفصيل من واقع تنفيذ فعلي.</p>
+    </div>
+    <div class="faq reveal reveal-delay-1">
+
+      <details>
+        <summary>إيه هو نظام إدارة المخازن المبردة بالظبط؟</summary>
+        <div class="faq-a">نظام إدارة المخازن المبردة (Cold Storage WMS) هو برنامج بيدير كل عمليات
+          الثلاجة أو المخزن المبرد رقميًا: استلام الشحنات، تحديد مكان تخزين كل بالية، تتبّع درجة
+          الحرارة، ترتيب الصرف حسب الصلاحية، والفوترة. الفرق بينه وبين نظام المخازن العادي إنه
+          <b>بيتعامل مع الحرارة والصلاحية كعوامل أساسية</b> مش بيانات إضافية — وده اللي بيمنع
+          هلاك البضاعة ويخلّي كل حركة موثّقة.</div>
+      </details>
+
+      <details>
+        <summary>يعني إيه نظام FEFO وليه مهم في التخزين البارد؟</summary>
+        <div class="faq-a">FEFO اختصار لـ First Expired, First Out — يعني <b>الأقرب انتهاءً يتصرف
+          الأول</b>، مش الأقدم دخولًا زي نظام FIFO. في البضاعة المبردة دي نقطة حاسمة: ممكن شحنة
+          دخلت متأخر لكن صلاحيتها أقرب. النظام بيرتّب أوامر الصرف تلقائيًا على أساس تاريخ
+          الصلاحية ويمنع الصرف الخاطئ، فبتقلّل الهالك بشكل ملموس من أول شهور التشغيل.</div>
+      </details>
+
+      <details>
+        <summary>النظام بيتابع درجة حرارة الثلاجات إزاي؟</summary>
+        <div class="faq-a">كل عنبر بيتحدّدله <b>درجة حرارة مستهدفة ومدى مسموح</b>. النظام بيعرض
+          الحرارة الحالية لكل عنبر على الداشبورد لحظيًا، وبيطلق تنبيه فوري لو خرجت عن المدى.
+          وكل قراءة بتتسجّل في سجل تاريخي تقدر ترجعله وقت المراجعة أو التدقيق أو لو حصل خلاف
+          مع عميل على حالة بضاعته.</div>
+      </details>
+
+      <details>
+        <summary>هل النظام بيشتغل على أكتر من مخزن أو فرع؟</summary>
+        <div class="faq-a">أيوه. تقدر تدير عدد غير محدود من المخازن والعنابر من نفس الحساب، وكل
+          مخزن ليه خريطته ودرجات حرارته وصلاحياته. الإدارة بتشوف <b>كل الفروع في شاشة واحدة</b>،
+          ومشرف كل مخزن بيشوف مخزنه بس. والنقل بين العنابر أو بين الفروع بيتسجّل كحركة كاملة
+          بالمستخدم والوقت.</div>
+      </details>
+
+      <details>
+        <summary>محتاج أجهزة خاصة عشان أشغّل النظام؟</summary>
+        <div class="faq-a">لأ. النظام بيشتغل من المتصفح على أي كمبيوتر، و<b>تطبيق التابلت
+          للسواقين والمناولة</b> بيشتغل على تابلت عادي. لمسح الباركود تقدر تستخدم كاميرا
+          التابلت أو قارئ باركود عادي (USB أو بلوتوث). لو عندك حساسات حرارة موجودة بالفعل،
+          بنقدر نربطها بالنظام بدل الإدخال اليدوي.</div>
+      </details>
+
+      <details>
+        <summary>هل فيه فوترة وإدارة لعملاء التخزين؟</summary>
+        <div class="faq-a">أيوه، لو بتأجّر مساحات تبريد للغير. لكل عميل ملف فيه عقده وأسعاره
+          المتفق عليها، وكل الباليتات المخزّنة باسمه. النظام <b>بيحسب الفاتورة تلقائيًا</b> على
+          أساس مدة التخزين وعدد الباليتات والخدمات الإضافية، وبيتابع المدفوع والمستحق فمفيش
+          فاتورة بتفوت عليك.</div>
+      </details>
+
+      <details>
+        <summary>إيه اللي بيحصل لبيانات المخزن الموجودة عندي دلوقتي؟</summary>
+        <div class="faq-a">بنبدأ بجلسة تجهيز بنرسم فيها خريطة مخازنك الفعلية جوّه النظام
+          (عنابر، ممرات، رفوف)، وبعدين <b>بنرفّع رصيدك الحالي</b> من ملفات Excel أو من نظامك
+          القديم. بعد الرفع بيتطبع باركود لكل بالية موجودة وتتربط بموقعها على الخريطة، وتبقى
+          شغّال من أول يوم.</div>
+      </details>
+
+      <details>
+        <summary>التنفيذ والتدريب بياخدوا قد إيه؟</summary>
+        <div class="faq-a">بيعتمد على حجم المخازن وعدد الأصناف، لكن التنفيذ النموذجي لمخزن
+          واحد بياخد من <b>أسبوعين لشهر</b> شامل تجهيز الخرائط ورفع الأرصدة وتدريب الفريق.
+          التدريب بيتم على مجموعات حسب الدور — إدارة، مشرف مخزن، محاسب، وسواقين — وبيفضل معاك
+          دعم فني بعد التشغيل.</div>
+      </details>
+
+      <details>
+        <summary>النظام بالعربي ولا مترجم؟</summary>
+        <div class="faq-a">النظام <b>اتبنى بالعربي من الأساس</b> بواجهة RTL كاملة — مش نسخة
+          مترجمة من نظام أجنبي. ده بيفرق في المصطلحات (بالية، عنبر، أمر صرف)، في اتجاه الشاشات
+          والتقارير، وفي سهولة استخدام العمالة للتطبيق جوّه المخزن من غير حاجز لغة. وفيه واجهة
+          إنجليزية متاحة كمان لو فريقك مختلط.</div>
+      </details>
+
     </div>
   </div>
 </section>
@@ -650,7 +1134,7 @@
       <p>احجز عرض تجريبي مباشر نوريكم فيه النظام شغال على بيانات مطابقة لطبيعة مخازنكم،
         ونجاوب على أي سؤال عن التنفيذ والتكامل مع أنظمتكم الحالية.</p>
       <div class="cta-actions">
-        <a href="mailto:mahmoudhabib55200@gmail.com?subject=طلب%20عرض%20تجريبي%20-%20سيستم%20التلاجات" class="btn btn-primary">
+        <a href="mailto:sales@coolstock.store?subject=طلب%20عرض%20تجريبي%20-%20CoolStock" class="btn btn-primary">
           احجز عرض تجريبي الآن
         </a>
         <a href="#dashboard" class="btn btn-ghost">راجع المميزات تاني</a>
@@ -658,7 +1142,7 @@
       <div class="cta-contact">
         <span>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z" opacity="0"/><path d="M22 6l-10 7L2 6"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg>
-          <a href="mailto:mahmoudhabib55200@gmail.com">mahmoudhabib55200@gmail.com</a>
+          <a href="mailto:sales@coolstock.store">sales@coolstock.store</a>
         </span>
       </div>
     </div>
@@ -667,7 +1151,41 @@
 
 <footer>
   <div class="container">
-    <span class="fbrand">سيستم التلاجات</span> · Cold Storage WMS — عرض تقديمي مُعد خصيصًا للمناقشة
+    <div class="foot-grid">
+      <div>
+        <img class="foot-logo" src="assets/logo.webp" alt="شعار CoolStock" width="1148" height="903" loading="lazy" decoding="async" />
+        <h4>CoolStock — نظام إدارة المخازن المبردة</h4>
+        <p>نظام عربي متكامل لإدارة المخازن المبردة وثلاجات الحفظ: تتبّع درجة الحرارة لحظيًا،
+          باركود فريد لكل بالية، صرف بنظام FEFO يمنع الهالك، خريطة مخزون حية، فوترة عملاء
+          التخزين، وتطبيق تابلت لسواقين التوصيل والمناولة. مناسب لثلاجات الخضار والفاكهة،
+          مخازن اللحوم والدواجن، مستودعات الأدوية، وشركات التخزين البارد في مصر والسعودية
+          ودول الخليج.</p>
+      </div>
+      <div>
+        <h4>أقسام الموقع</h4>
+        <ul>
+          <li><a href="#dashboard">لوحة التحكم</a></li>
+          <li><a href="#warehouses">إدارة المخازن والعنابر</a></li>
+          <li><a href="#operations">عمليات الاستلام والصرف</a></li>
+          <li><a href="#driver">تطبيق تابلت السواقين</a></li>
+          <li><a href="#business">العملاء والفوترة</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>روابط مفيدة</h4>
+        <ul>
+          <li><a href="#usecases">مين بيستخدم النظام</a></li>
+          <li><a href="#why">ليه CoolStock</a></li>
+          <li><a href="#faq">الأسئلة الشائعة</a></li>
+          <li><a href="#contact">احجز عرض تجريبي</a></li>
+          <li><a href="mailto:sales@coolstock.store">تواصل معنا</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span><span class="fbrand">CoolStock</span> · جميع الحقوق محفوظة &copy; <span id="yr">2026</span></span>
+      <span class="lang"><a href="en/" hreflang="en" lang="en">English version</a></span>
+    </div>
   </div>
 </footer>
 
@@ -709,6 +1227,9 @@
   document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
   lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
   window.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
+  // سنة حقوق النشر تلقائيًا
+  const yr=document.getElementById('yr'); if(yr) yr.textContent=new Date().getFullYear();
+
 </script>
 
 </body>

@@ -1,0 +1,9 @@
+# سيستم التلاجات — Cold Storage WMS
+User-agent: *
+Allow: /
+
+# لا يوجد ما يستدعي الحجب في هذا الموقع
+Disallow:
+
+# خريطة الموقع
+Sitemap: https://www.coolstock.store/sitemap.xml
